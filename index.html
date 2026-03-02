@@ -1,26 +1,265 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>CV Akmal Fayyazi</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mohammad Akmal Fayyazi — Portfolio & CV</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f0f13; --surface: #18181f; --surface2: #222230;
+      --accent: #7c6aff; --accent2: #a78bfa;
+      --text: #e8e8f0; --muted: #9898b0; --border: #2a2a3a;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 4rem;
+      background: rgba(15,15,19,0.88); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-weight: 800; font-size: 1.1rem; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul li a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color .2s; }
+    nav ul li a:hover { color: var(--text); }
+
+    #hero {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      padding: 8rem 2rem 4rem;
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(124,106,255,0.18) 0%, transparent 70%);
+    }
+    .hero-inner { max-width: 900px; width: 100%; display: flex; gap: 4rem; align-items: center; flex-wrap: wrap; justify-content: center; }
+    .hero-photo-wrap {
+      flex-shrink: 0; width: 240px; height: 300px; border-radius: 24px;
+      padding: 4px; background: linear-gradient(135deg, var(--accent), #e879f9);
+      box-shadow: 0 0 60px rgba(124,106,255,0.35);
+    }
+    .hero-photo-wrap img { width: 100%; height: 100%; object-fit: cover; border-radius: 21px; display: block; }
+    .hero-text { flex: 1; min-width: 260px; }
+    .hero-badge { display: inline-block; background: rgba(124,106,255,0.15); color: var(--accent2); border: 1px solid rgba(124,106,255,0.3); padding: 0.35rem 1rem; border-radius: 50px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 1rem; }
+    .hero-text h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+    .hero-text h1 span { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-text p { color: var(--muted); font-size: 1rem; max-width: 440px; margin-bottom: 1.5rem; line-height: 1.7; }
+    .hero-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.65rem 1.5rem; border-radius: 10px; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: transform .2s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), #9b78ff); color: #fff; box-shadow: 0 4px 20px rgba(124,106,255,0.4); }
+    .btn-ghost { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+
+    section { padding: 5rem 2rem; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .section-label { display: flex; align-items: center; gap: 0.75rem; color: var(--accent2); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--accent2), transparent); max-width: 60px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 2.5rem; }
+
+    #education { background: var(--surface); }
+    .edu-card { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem 2rem; margin-bottom: 1.25rem; display: flex; gap: 1.5rem; align-items: flex-start; transition: border-color .2s; }
+    .edu-card:hover { border-color: var(--accent); }
+    .edu-icon { width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0; background: linear-gradient(135deg, var(--accent), #9b78ff); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
+    .edu-info h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .edu-info .school { color: var(--accent2); font-size: 0.9rem; font-weight: 500; }
+    .edu-info .period { color: var(--muted); font-size: 0.8rem; background: var(--surface2); border: 1px solid var(--border); padding: 0.2rem 0.6rem; border-radius: 6px; display: inline-block; margin-top: 0.4rem; }
+
+    .exp-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.75rem 2rem; margin-bottom: 1.5rem; position: relative; overflow: hidden; transition: border-color .2s; }
+    .exp-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, var(--accent), #e879f9); }
+    .exp-card:hover { border-color: var(--accent); }
+    .exp-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
+    .exp-top h3 { font-size: 1.05rem; font-weight: 700; }
+    .role { background: rgba(124,106,255,0.15); color: var(--accent2); border: 1px solid rgba(124,106,255,0.25); font-size: 0.78rem; font-weight: 700; padding: 0.2rem 0.75rem; border-radius: 50px; }
+    .exp-org { color: var(--muted); font-size: 0.85rem; margin-bottom: 0.2rem; }
+    .exp-period { color: var(--muted); font-size: 0.78rem; margin-bottom: 1rem; }
+    .exp-desc { color: var(--muted); font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.7; }
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .exp-bullets li { display: flex; align-items: flex-start; gap: 0.6rem; color: var(--text); font-size: 0.88rem; }
+    .exp-bullets li::before { content: '▸'; color: var(--accent2); flex-shrink: 0; margin-top: 2px; }
+
+    #projects { background: var(--surface); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 1.5rem; }
+    .project-card { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 1.75rem; display: flex; flex-direction: column; gap: 0.75rem; transition: border-color .2s, transform .2s, box-shadow .2s; }
+    .project-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(124,106,255,0.18); }
+    .project-header { display: flex; align-items: center; gap: 0.75rem; }
+    .project-icon { width: 42px; height: 42px; border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
+    .project-card h3 { font-size: 1rem; font-weight: 700; }
+    .project-card p { color: var(--muted); font-size: 0.875rem; line-height: 1.65; }
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; padding-top: 0.5rem; }
+    .tag { background: var(--surface2); border: 1px solid var(--border); color: var(--muted); font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 6px; }
+    .gh-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--accent2); font-size: 0.8rem; font-weight: 600; text-decoration: none; margin-top: 0.25rem; }
+    .gh-link:hover { text-decoration: underline; }
+
+    footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem; }
+    footer a { color: var(--accent2); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      nav { padding: 1rem 1.5rem; }
+      nav ul { gap: 1rem; }
+      .hero-photo-wrap { width: 180px; height: 230px; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Mohammad Akmal Fayyazi</h1>
-  <img src="foto.jpeg" width="150">
 
-  <h2>Tentang Saya</h2>
-  <p>Mahasiswa AI Engineering ITS yang suka web dev & blockchain.</p>
-
-  <h2>Project / Aplikasi</h2>
+<nav>
+  <div class="nav-logo">MAF.</div>
   <ul>
-    <li>Landing Page SpeedWorks</li>
-    <li>EDA Air Quality Beijing (Tableau)</li>
-    <li>Mall Tycoon Mall (OOP Final Project)</li>
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
   </ul>
+</nav>
 
-  <h2>Rencana Web untuk Final Project</h2>
-  <p>Website manajemen mall berbasis web.</p>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-photo-wrap">
+      <img src="foto.jpeg" alt="Mohammad Akmal Fayyazi" />
+    </div>
+    <div class="hero-text">
+      <div class="hero-badge">🎓 AI Engineering Student</div>
+      <h1>Mohammad<br/><span>Akmal Fayyazi</span></h1>
+      <p>Undergraduate student in Artificial Intelligence Engineering at Institut Teknologi Sepuluh Nopember, Surabaya. Building intelligent systems and meaningful software.</p>
+      <div class="hero-links">
+        <a href="https://github.com/akmalfayyazi" target="_blank" class="btn btn-primary">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub
+        </a>
+        <a href="#projects" class="btn btn-ghost">View Projects →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <h2>Pekerjaan Impian</h2>
-  <p>AI Engineer / Fullstack Web Developer</p>
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <div class="section-label">📚 Background</div>
+    <h2 class="section-title">Education</h2>
+    <div class="edu-card">
+      <div class="edu-icon">🏛️</div>
+      <div class="edu-info">
+        <h3>Undergraduate — Artificial Intelligence Engineering</h3>
+        <div class="school">Institut Teknologi Sepuluh Nopember · Surabaya, Indonesia</div>
+        <span class="period">Aug 2024 – Jun 2028 (Expected)</span>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">📖</div>
+      <div class="edu-info">
+        <h3>High School — Religion Class</h3>
+        <div class="school">Mas Al Irsyad Tengaran · Semarang, Indonesia</div>
+        <span class="period">Jul 2021 – Jul 2024</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label">💼 Journey</div>
+    <h2 class="section-title">Organisational Experience</h2>
+    <div class="exp-card">
+      <div class="exp-top">
+        <h3>Hadith Memorization Class (HMC)</h3>
+        <span class="role">The Chairman</span>
+      </div>
+      <div class="exp-org">📍 Semarang, Indonesia</div>
+      <div class="exp-period">Jun 2023 – Jun 2024</div>
+      <p class="exp-desc">A student-led initiative aimed at fostering the memorization and understanding of the sayings and teachings of Prophet Muhammad.</p>
+      <ul class="exp-bullets">
+        <li>Monitored over 50 students in their memorization progress</li>
+        <li>Organized Sunnah fasting sessions twice a week</li>
+        <li>Grew the fellowship to over 100 students by the following year</li>
+      </ul>
+    </div>
+    <div class="exp-card">
+      <div class="exp-top">
+        <h3>Rihlah HMC</h3>
+        <span class="role">Head of Event</span>
+      </div>
+      <div class="exp-org">📍 Semarang, Indonesia</div>
+      <div class="exp-period">Jan 2024 – Feb 2024</div>
+      <p class="exp-desc">A recreational outing for HMC students combining relaxing activities with spiritual reflection on memorized Hadith.</p>
+      <ul class="exp-bullets">
+        <li>Managed a budget of over 3 million rupiah for 50+ students</li>
+        <li>Supervised all students to ensure their safety throughout the event</li>
+        <li>Coordinated with the principal and teachers for proposal approval</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label">🚀 Work</div>
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-icon" style="background: linear-gradient(135deg,#16a34a,#4ade80);">🌴</div>
+          <h3>Oil Palm Health Detection</h3>
+        </div>
+        <p>Developed during a Datathon competition. A deep learning model that detects oil palm trees from drone imagery and classifies them as healthy, unhealthy, or moderately healthy.</p>
+        <div class="tech-tags">
+          <span class="tag">Computer Vision</span><span class="tag">Deep Learning</span><span class="tag">Drone Imagery</span><span class="tag">Datathon</span>
+        </div>
+        <a class="gh-link" href="https://github.com/akmalfayyazi/oil-palm-health-detection" target="_blank">View on GitHub →</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-icon" style="background: linear-gradient(135deg,#0ea5e9,#38bdf8);">👁️</div>
+          <h3>Eye Disease Classification</h3>
+        </div>
+        <p>A machine learning model classifying eye conditions into four categories: cataract, diabetic retinopathy, glaucoma, and normal. Final project for ML & Data Mining course.</p>
+        <div class="tech-tags">
+          <span class="tag">Machine Learning</span><span class="tag">Classification</span><span class="tag">Medical Imaging</span><span class="tag">Data Mining</span>
+        </div>
+        <a class="gh-link" href="https://github.com/akmalfayyazi/FinalProject-ML-DM" target="_blank">View on GitHub →</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-icon" style="background: linear-gradient(135deg,#dc2626,#f87171);">🚑</div>
+          <h3>Nearest Hospital Route — Ambulance System</h3>
+        </div>
+        <p>An intelligent ambulance routing system using the A* algorithm to find the fastest path to the nearest hospital in real-time emergency scenarios.</p>
+        <div class="tech-tags">
+          <span class="tag">A* Algorithm</span><span class="tag">Pathfinding</span><span class="tag">Graph Search</span><span class="tag">Python</span>
+        </div>
+        <a class="gh-link" href="https://github.com/vecko2/Nearest-Hospital-Route-Ambulance-System-Using-A-Star-Algorithm" target="_blank">View on GitHub →</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-icon" style="background: linear-gradient(135deg,#d97706,#fbbf24);">🏡</div>
+          <h3>Cozy Idle Builder</h3>
+        </div>
+        <p>A cozy idle-style game built with Pygame where players build and manage a peaceful settlement, with relaxing gameplay loops and charming visuals.</p>
+        <div class="tech-tags">
+          <span class="tag">Pygame</span><span class="tag">Game Dev</span><span class="tag">Python</span><span class="tag">Idle Game</span>
+        </div>
+        <a class="gh-link" href="https://github.com/akmalfayyazi/cozy-idle-builder" target="_blank">View on GitHub →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Crafted by <a href="https://github.com/akmalfayyazi">Mohammad Akmal Fayyazi</a> · Institut Teknologi Sepuluh Nopember, Surabaya · 2025</p>
+</footer>
+<script>
+  window.onload = function () {
+    window.scrollTo(0, 0);
+  };
+</script>
 </body>
 </html>
